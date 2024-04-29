@@ -1,30 +1,32 @@
-// src/App.js
 import React, { useState, useEffect } from 'react';
-import ProductList from './components/ProductList';
-import Summary from './components/Summary';
-import CheckoutButton from './components/CheckoutButton';
-import './App.scss'; // Assuming you use SASS
+import ProductList from './components/ProductList/ProductList';
+import Summary from './components/Summary/Summary';
+import CheckoutButton from './components/CheckoutButton/CheckoutButton';
+import { getProducts, createBasket } from './services/apiService';
+import './App.scss';
 
 const App = () => {
   const [products, setProducts] = useState([]);
   const [basketItems, setBasketItems] = useState([]);
+  const [basketId, setBasketId] = useState(null);
 
   useEffect(() => {
-    // Fetch the products from the API and set them to the products state
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch('https://cash-register-api-fd7bc2ac94d6.herokuapp.com/products');
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        setProducts(data.map(product => ({ ...product, quantity: 0 }))); // Adding quantity property for the UI
-      } catch (error) {
-        console.error('There has been a problem with your fetch operation:', error);
-      }
-    };
+    // Fetch products from API and set them to state
+    getProducts()
+      .then(setProducts)
+      .catch((error) => {
+        console.error('Failed to fetch products:', error);
+      });
 
-    fetchProducts();
+    // Create a new basket
+    createBasket()
+      .then((basket) => {
+        setBasketId(basket.id);
+        console.log('Basket created:', basket);
+      })
+      .catch((error) => {
+        console.error('Failed to create basket:', error);
+      });
   }, []);
 
   const handleQuantityChange = (productId, change) => {

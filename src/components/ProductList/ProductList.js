@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductItem from './ProductItem';
+import ProductItem from '../ProductItem/ProductItem';
 
 const ProductList = ({ products, onQuantityChange }) => {
   return (
@@ -12,3 +12,4 @@ const ProductList = ({ products, onQuantityChange }) => {
 };
 
 export default ProductList;
+  
