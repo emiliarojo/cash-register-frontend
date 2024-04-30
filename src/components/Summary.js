@@ -12,15 +12,22 @@ const Summary = ({ products, basketItems }) => {
 
   return (
     <div className="summary">
-      {basketItems.map((item) => (
-        <div key={item.product_id} className="summary-item">
-          <span>{item.quantity} x {getProductName(products, item.product_id)}</span>
-          <span>{(item.paid_quantity * parseFloat(item.discount_price)).toFixed(2)}</span>
-        </div>
-      ))}
+      <div className="container-summary-screen">
+        <div className="summary-screen">
+          <div className="summary-screen-text">
+            <h1 className="header">Summary</h1>
+            {basketItems.map((item) => (
+              <div key={item.product_id} className="summary-item text">
+                <span>{item.quantity} x {getProductName(products, item.product_id)}</span>
+                <span>€{(item.paid_quantity * parseFloat(item.discount_price)).toFixed(2)}</span>
+              </div>
+            ))}
 
-      <div className="summary-total">
-        <strong>Total:</strong> {calculateTotal().toFixed(2)}
+            <div className="summary-total text">
+              <strong>Total: €</strong> {calculateTotal().toFixed(2)}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -2,12 +2,17 @@ import React, { useState, useEffect } from 'react';
 import Basket from './components/Basket';
 import Summary from './components/Summary';
 import CheckoutButton from './components/CheckoutButton';
+import Receipt from './components/Receipt';
 import { getProducts, createBasket, getBasketItems, addItemToBasket, removeItemFromBasket,updateItemInBasket, checkoutBasket } from './services/apiService';
+import GBag1 from './assets/gbag1.png';
+import GBag2 from './assets/gbag2.webp';
 
 const App = () => {
   const [products, setProducts] = useState([]);
   const [basketItems, setBasketItems] = useState([]);
   const [basketId, setBasketId] = useState(null);
+  const [checkingOut, setCheckingOut] = useState(false);
+  const [receiptDetails, setReceiptDetails] = useState(null);
 
   useEffect(() => {
     // Initialize the app by creating or retrieving a basket and fetching products
@@ -65,6 +70,8 @@ const App = () => {
     try {
       const result = await checkoutBasket(basketId);
       console.log('Checkout result:', result);
+      setReceiptDetails(result);
+      setCheckingOut(true);
     } catch (error) {
       console.error('Checkout error:', error);
     }
@@ -75,12 +82,25 @@ const App = () => {
       <div className="container-basket">
         <div className="card-basket">
           <Basket products={products} basketItems={basketItems} onQuantityChange={handleQuantityChange} />
-          <CheckoutButton onCheckout={handleCheckout} />
+          <div className="container-btn-checkout">
+            <CheckoutButton onCheckout={handleCheckout} />
+          </div>
         </div>
       </div>
       <div className="container-summary">
         <Summary products={products} basketItems={basketItems} />
+        <div className="container-stand">
+          <div className="stand"></div>
+        </div>
       </div>
+      <img src={GBag2} alt="Grocery Bag Drawing" className="gbag2" />
+      <img src={GBag1} alt="Grocery Bag Drawing" className="gbag1" />
+      {checkingOut && <div className="checkout-overlay"></div>}
+      {checkingOut && (
+        <div className="container-receipt">
+          <Receipt receiptDetails={receiptDetails}/>
+        </div>
+      )}
     </div>
   );
 };

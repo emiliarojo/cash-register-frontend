@@ -6,10 +6,13 @@ const Basket = ({ products, basketItems, onQuantityChange }) => {
   console.log('Basket Items:', basketItems);
 
   return (
-    <div className="product-list">
-      {products.map((product) => (
-        <Product key={product.id} product={product} basketItem={ getBasketItem(product, basketItems) } onQuantityChange={onQuantityChange} />
-      ))}
+    <div className="card-basket-items">
+      <h1 className="header">Items</h1>
+      <div className="product-list">
+        {products.map((product) => (
+          <Product key={product.id} product={product} basketItem={ getBasketItem(product, basketItems) } onQuantityChange={onQuantityChange} />
+        ))}
+      </div>
     </div>
   );
 };

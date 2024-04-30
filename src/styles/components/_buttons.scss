@@ -1,0 +1,27 @@
+.btn-quantity {
+  border-radius: 50pt;
+  width: 2rem;
+  height: 2rem;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  &:disabled {
+    background-color: #D3D3D3;
+    cursor: none;
+  }
+}
+
+.btn-checkout {
+  background-color: black;
+  color: white;
+  padding: 0.5rem 0;
+  border: none;
+  border-radius: 30pt;
+  width: 70%;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  &:hover {
+    background-color: #333;
+  }
+}
