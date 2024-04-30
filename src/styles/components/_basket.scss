@@ -21,3 +21,31 @@
   display: flex;
   justify-content: center;
 }
+
+.card-basket {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 70%;
+  height: 70%;
+  background: #FFFFFF;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  .card-basket-items {
+    width: 100%;
+    height: 70%;
+  }
+}
+
+
+@media screen and (min-width: 768px){
+  .container-basket {
+    height: 80%;
+    width: 50%;
+  }
+  .card-basket {
+    width: 80%;
+    height: 36%;
+  }
+}

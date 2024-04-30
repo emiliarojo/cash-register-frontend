@@ -69,3 +69,18 @@
   justify-content: space-between;
   align-items: center;
 }
+
+@media screen and (min-width: 768px){
+  .container-summary {
+    height: 100%;
+    width: 50%;
+    justify-content: flex-end;
+  }
+  .summary {
+    width: 90%;
+    height: 50%;
+  }
+  .container-stand {
+    height: 30%;
+  }
+}

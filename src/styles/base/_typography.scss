@@ -20,3 +20,15 @@
   font-weight: 300;
   color: black;
 }
+
+@media screen and (min-width: 768px){
+  .header {
+    font-size: 1.8rem;
+  }
+  .text {
+    font-size: 1.4rem;
+  }
+  .text-sm {
+    font-size: 1.2rem;
+  }
+}
