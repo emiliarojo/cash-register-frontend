@@ -93,8 +93,10 @@ const App = () => {
           <div className="stand"></div>
         </div>
       </div>
-      <img src={GBag2} alt="Grocery Bag Drawing" className="gbag2" />
-      <img src={GBag1} alt="Grocery Bag Drawing" className="gbag1" />
+      <div className="container-images">
+        <img src={GBag2} alt="Grocery Bag Drawing" className="gbag2" />
+        <img src={GBag1} alt="Grocery Bag Drawing" className="gbag1" />
+      </div>
       {checkingOut && <div className="checkout-overlay"></div>}
       {checkingOut && (
         <div className="container-receipt">
