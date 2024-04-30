@@ -1,21 +1,16 @@
 .container-images {
   width: 100vw;
-  height: 16%;
+  height: 20%;
   position: absolute;
   bottom: 0;
   z-index: 5;
   overflow: hidden;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: flex-start;
-}
-
-.gbag1 {
-  width: 240px;
-  height: fit-content;
-}
-
-.gbag2 {
-  width: 240px;
-  height: fit-content;
+  img {
+    width: auto;
+    height: auto;
+    max-width: 70%;
+  }
 }
