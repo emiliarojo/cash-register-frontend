@@ -1,6 +1,6 @@
 # Cash Register React App
 
-This is a cash register frontend application built with React designed to integrate seamlessly with a backend API for managing baskets, products, and discounts. Users can add items to their baskets, adjust quantities, view summaries, and proceed to checkout where they get a receipt.
+This is a responsive cash register frontend application built with React designed to integrate seamlessly with a backend API for managing baskets, products, and discounts. Users can add items to their baskets, adjust quantities, view summaries, and proceed to checkout where they get a receipt.
 
 You can check out the app by clicking on this [link](https://cash-register-frontend.vercel.app/).
 
