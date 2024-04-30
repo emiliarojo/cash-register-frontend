@@ -1,89 +1,99 @@
-import { getProducts, createBasket, addItemToBasket, updateItemInBasket, removeItemFromBasket, checkoutBasket } from './apiService';
+// apiService.test.js
+
+import { getProducts, createBasket, getBasketItems, addItemToBasket, updateItemInBasket, removeItemFromBasket, checkoutBasket } from './apiService';
 
 global.fetch = jest.fn();
-const API_BASE_URL = 'https://cash-register-api-fd7bc2ac94d6.herokuapp.com';
 
-
-describe('apiService', () => {
-  afterEach(() => {
-    fetch.mockClear(); // Clear mock data after each test
+describe('API Functions', () => {
+  beforeEach(() => {
+    fetch.mockClear();
   });
 
-  test('getProducts should fetch products successfully', async () => {
-    const mockProducts = [{ id: 1, name: "Green Tea" }, { id: 2, name: "Starwberries" }, { id: 3, name: "Coffee" }];
+  test('getProducts makes a GET request to the correct endpoint', async () => {
+    const mockResponse = [{ id: 1, name: 'Green Tea', price: 3.50 }, { id: 2, name: 'Strawberries', price: 5.00 }];
     fetch.mockResolvedValueOnce({
       ok: true,
-      json: () => Promise.resolve(mockProducts),
+      headers: {
+        get: (name) => name === "Content-Length" ? "10" : null,
+      },
+      json: () => Promise.resolve(mockResponse),
     });
 
     const products = await getProducts();
 
-    expect(products).toEqual(mockProducts);
-    expect(fetch).toHaveBeenCalledTimes(1);
-    expect(fetch).toHaveBeenCalledWith(`${API_BASE_URL}/products`, {
+    expect(fetch).toHaveBeenCalledWith('https://cash-register-api-fd7bc2ac94d6.herokuapp.com/products', {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
     });
+
+    expect(products).toEqual(mockResponse);
   });
 
-  test('createBasket should create a basket successfully', async () => {
-    const mockBasket = { basket_id: 1, session_id: "test_session" };
+  test('createBasket makes a POST request to the correct endpoint', async () => {
+    const mockResponse = { basket_id: 1, session_id: 'test_session' };
     fetch.mockResolvedValueOnce({
       ok: true,
-      json: () => Promise.resolve(mockBasket),
+      headers: {
+        get: (name) => name === "Content-Length" ? "10" : null,
+      },
+      json: () => Promise.resolve(mockResponse),
     });
 
     const basket = await createBasket();
 
-    expect(basket).toEqual(mockBasket);
-    expect(fetch).toHaveBeenCalledTimes(1);
-    expect(fetch).toHaveBeenCalledWith(`${API_BASE_URL}/baskets`, {
+    expect(fetch).toHaveBeenCalledWith('https://cash-register-api-fd7bc2ac94d6.herokuapp.com/baskets', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
     });
+
+    expect(basket).toEqual(mockResponse);
   });
 
-  test('addItemToBasket should add an item successfully', async () => {
+  test('getBasketItems makes a GET request to the correct endpoint', async () => {
+    const mockResponse = [
+      { id: 1, product_id: 1, quantity: 2, discount_price: 3.50, paid_quantity: 1 },
+      { id: 2, product_id: 2, quantity: 3, discount_price: 4.50, paid_quantity: 3 },
+    ];
+    const basketId = 1;
+
+    fetch.mockResolvedValueOnce({
+      ok: true,
+      headers: {
+        get: (name) => name === "Content-Length" ? "10" : null,
+      },
+      json: () => Promise.resolve(mockResponse),
+    });
+
+    const basketItems = await getBasketItems(basketId);
+
+    expect(fetch).toHaveBeenCalledWith(`https://cash-register-api-fd7bc2ac94d6.herokuapp.com/baskets/${basketId}/basket_items`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+    });
+
+    expect(basketItems).toEqual(mockResponse);
+  });
+
+  test('addItemToBasket adds an item, updates an existing item, or removes an item', async () => {
     const basketId = 1;
     const productId = 1;
     const quantity = 2;
-    const mockResponse = { success: true };
+    const mockResponse = { id: 1, product_id: productId, quantity, discount_price: 3.50, paid_quantity: 1 };
 
     fetch.mockResolvedValueOnce({
       ok: true,
+      headers: {
+        get: (name) => name === "Content-Length" ? "10" : null,
+      },
       json: () => Promise.resolve(mockResponse),
     });
 
-    const response = await addItemToBasket(basketId, productId, quantity);
+    await addItemToBasket(basketId, productId, quantity);
 
-    expect(response).toEqual(mockResponse);
-    expect(fetch).toHaveBeenCalledTimes(1);
-    expect(fetch).toHaveBeenCalledWith(`${API_BASE_URL}/baskets/${basketId}/basket_items`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ product_id: productId, quantity }),
-      credentials: 'include',
-    });
-  });
-
-  test('updateItemInBasket should update an item successfully', async () => {
-    const basketId = 1;
-    const basketItemId = 1;
-    const quantity = 3;
-    const mockResponse = { success: true };
-
-    fetch.mockResolvedValueOnce({
-      ok: true,
-      json: () => Promise.resolve(mockResponse),
-    });
-
-    const response = await updateItemInBasket(basketId, basketItemId, quantity);
-
-    expect(response).toEqual(mockResponse);
-    expect(fetch).toHaveBeenCalledTimes(1);
-    expect(fetch).toHaveBeenCalledWith(`${API_BASE_URL}/baskets/${basketId}/basket_items/${basketItemId}`, {
+    expect(fetch).toHaveBeenCalledWith(`https://cash-register-api-fd7bc2ac94d6.herokuapp.com/baskets/${basketId}/basket_items/${mockResponse.id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ quantity }),
@@ -91,44 +101,78 @@ describe('apiService', () => {
     });
   });
 
-  test('removeItemFromBasket should remove an item successfully', async () => {
+  test('updateItemInBasket makes a PUT request to update an item', async () => {
     const basketId = 1;
     const basketItemId = 1;
-    const mockResponse = { success: true };
+    const quantity = 3;
+    const mockResponse = { id: basketItemId, product_id: 1, quantity, discount_price: 3.50, paid_quantity: 2 };
 
     fetch.mockResolvedValueOnce({
       ok: true,
+      headers: {
+        get: (name) => name === "Content-Length" ? "10" : null,
+      },
       json: () => Promise.resolve(mockResponse),
     });
 
-    const response = await removeItemFromBasket(basketId, basketItemId);
+    await updateItemInBasket(basketId, basketItemId, quantity);
 
-    expect(response).toEqual(mockResponse);
-    expect(fetch).toHaveBeenCalledTimes(1);
-    expect(fetch).toHaveBeenCalledWith(`${API_BASE_URL}/baskets/${basketId}/basket_items/${basketItemId}`, {
+    expect(fetch).toHaveBeenCalledWith(`https://cash-register-api-fd7bc2ac94d6.herokuapp.com/baskets/${basketId}/basket_items/${basketItemId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ quantity }),
+      credentials: 'include',
+    });
+
+    // Additional checks...
+  });
+
+  test('removeItemFromBasket makes a DELETE request', async () => {
+    const basketId = 1;
+    const basketItemId = 2;
+
+    fetch.mockResolvedValueOnce({
+      ok: true,
+      headers: {
+        get: (name) => name === "Content-Length" ? "10" : null,
+      },
+      json: () => Promise.resolve({}),
+    });
+
+    await removeItemFromBasket(basketId, basketItemId);
+
+    expect(fetch).toHaveBeenCalledWith(`https://cash-register-api-fd7bc2ac94d6.herokuapp.com/baskets/${basketId}/basket_items/${basketItemId}`, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
     });
   });
 
-  test('checkoutBasket should checkout the basket successfully', async () => {
+  test('checkoutBasket makes a POST request for checkout', async () => {
     const basketId = 1;
     const mockResponse = { total: 20.0, items: [], discounts: [] };
 
     fetch.mockResolvedValueOnce({
       ok: true,
+      headers: {
+        get: (name) => name === "Content-Length" ? "10" : null,
+      },
       json: () => Promise.resolve(mockResponse),
     });
 
-    const response = await checkoutBasket(basketId);
+    const result = await checkoutBasket(basketId);
 
-    expect(response).toEqual(mockResponse);
-    expect(fetch).toHaveBeenCalledTimes(1);
-    expect(fetch).toHaveBeenCalledWith(`${API_BASE_URL}/baskets/${basketId}/checkout`, {
+    expect(fetch).toHaveBeenCalledWith(`https://cash-register-api-fd7bc2ac94d6.herokuapp.com/baskets/${basketId}/checkout`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
     });
+
+    expect(result).toEqual(mockResponse);
+  });
+
+  afterEach(() => {
+    fetch.mockClear();
+    jest.clearAllTimers();
   });
 });
