@@ -1,7 +1,6 @@
-// src/components/ProductItem.js
 import React from 'react';
 
-const ProductItem = ({ product, onQuantityChange }) => {
+const BasketItem = ({ product, onQuantityChange }) => {
   return (
     <div className="product-item">
       <span className="product-name">{product.name}</span>
@@ -14,4 +13,4 @@ const ProductItem = ({ product, onQuantityChange }) => {
   );
 };
 
-export default ProductItem;
+export default BasketItem;

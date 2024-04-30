@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import ProductList from './components/ProductList/ProductList';
+import Basket from './components/Basket/Basket';
 import Summary from './components/Summary/Summary';
 import CheckoutButton from './components/CheckoutButton/CheckoutButton';
 import { getProducts, createBasket } from './services/apiService';
@@ -11,13 +11,6 @@ const App = () => {
   const [basketId, setBasketId] = useState(null);
 
   useEffect(() => {
-    // Fetch products from API and set them to state
-    getProducts()
-      .then(setProducts)
-      .catch((error) => {
-        console.error('Failed to fetch products:', error);
-      });
-
     // Create a new basket
     createBasket()
       .then((basket) => {
@@ -27,17 +20,26 @@ const App = () => {
       .catch((error) => {
         console.error('Failed to create basket:', error);
       });
+    // Fetch products from API and set them to state
+    getProducts()
+      .then(setProducts)
+      .catch((error) => {
+        console.error('Failed to fetch products:', error);
+      });
+
   }, []);
 
   const handleQuantityChange = (productId, change) => {
+
   };
 
   const handleCheckout = () => {
+
   };
 
   return (
     <div className="app">
-      <ProductList products={products} onQuantityChange={handleQuantityChange} />
+      <Basket products={products} onQuantityChange={handleQuantityChange} />
       <Summary basketItems={basketItems} />
       <CheckoutButton onCheckout={handleCheckout} />
     </div>
