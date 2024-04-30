@@ -3,7 +3,6 @@ import Basket from './components/Basket';
 import Summary from './components/Summary';
 import CheckoutButton from './components/CheckoutButton';
 import { getProducts, createBasket, getBasketItems, addItemToBasket, removeItemFromBasket,updateItemInBasket, checkoutBasket } from './services/apiService';
-import './App.scss';
 
 const App = () => {
   const [products, setProducts] = useState([]);
@@ -73,9 +72,15 @@ const App = () => {
 
   return (
     <div className="app">
-      <Basket products={products} basketItems={basketItems} onQuantityChange={handleQuantityChange} />
-      <CheckoutButton onCheckout={handleCheckout} />
-      <Summary products={products} basketItems={basketItems} />
+      <div className="container-basket">
+        <div className="card-basket">
+          <Basket products={products} basketItems={basketItems} onQuantityChange={handleQuantityChange} />
+          <CheckoutButton onCheckout={handleCheckout} />
+        </div>
+      </div>
+      <div className="container-summary">
+        <Summary products={products} basketItems={basketItems} />
+      </div>
     </div>
   );
 };
