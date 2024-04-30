@@ -41,11 +41,20 @@
 
 @media screen and (min-width: 768px){
   .container-basket {
-    height: 80%;
+    height: 100%;
     width: 50%;
+    justify-content: flex-start;
   }
   .card-basket {
-    width: 80%;
-    height: 36%;
+    margin-top: 4rem;
+    width: 70%;
+    height: 38%;
+  }
+}
+
+@media screen and (min-height: 1200px){
+  .card-basket {
+    height: 30%;
+    margin-top: 8rem;
   }
 }
