@@ -56,11 +56,9 @@ To run the tests:
 The app is configured to make API requests to a Rails backend hosted on Heroku. Requests are routed to [https://cash-register-api-fd7bc2ac94d6.herokuapp.com](https://cash-register-api-fd7bc2ac94d6.herokuapp.com), handling tasks such as basket management, product retrieval, and checkout. Keep in mind this link is just the root. Please read the [documentation](https://github.com/emiliarojo/cash-register-api) to understand how to make requests to this API.
 
 ## Screenshots
-<img width="1437" alt="Screenshot 2024-05-01 at 01 57 34" src="https://github.com/emiliarojo/cash-register-frontend/assets/115421477/f4c1d950-0ac7-424e-a327-dfc0af2bc192">
-<img width="1437" alt="Screenshot 2024-05-01 at 01 58 08" src="https://github.com/emiliarojo/cash-register-frontend/assets/115421477/f372ca4c-dfd4-4a8e-ac23-1733d1269aba">
-<img width="282" alt="Screenshot 2024-05-01 at 02 03 02" src="https://github.com/emiliarojo/cash-register-frontend/assets/115421477/6ddede61-a60d-4e62-9fb3-c0695d58abb5">
-<img width="282" alt="Screenshot 2024-05-01 at 02 03 23" src="https://github.com/emiliarojo/cash-register-frontend/assets/115421477/1da30b7f-8549-431b-b9a2-ebaf436fd8d6">
-<img width="282" alt="Screenshot 2024-05-01 at 02 03 32" src="https://github.com/emiliarojo/cash-register-frontend/assets/115421477/ad93f32d-ad17-4394-9f4e-ce22e2eef5f3">
-<img width="282" alt="Screenshot 2024-05-01 at 02 04 21" src="https://github.com/emiliarojo/cash-register-frontend/assets/115421477/cbab8b8f-a8e5-47ed-b726-98955348b384">
-
-
+<img width="1439" alt="Screenshot 2024-05-01 at 02 15 32" src="https://github.com/emiliarojo/cash-register-frontend/assets/115421477/39264395-9496-40d4-a355-30f033e7ec0c">
+<img width="1439" alt="Screenshot 2024-05-01 at 02 15 41" src="https://github.com/emiliarojo/cash-register-frontend/assets/115421477/a4c5c119-a916-407e-8b4a-6e80a4948167">
+<img width="281" alt="Screenshot 2024-05-01 at 02 16 28" src="https://github.com/emiliarojo/cash-register-frontend/assets/115421477/60a9426a-a937-463d-a969-7e104b4f39f4">
+<img width="281" alt="Screenshot 2024-05-01 at 02 16 45" src="https://github.com/emiliarojo/cash-register-frontend/assets/115421477/92862e4a-4596-44a0-8b18-e2fd80ae078f">
+<img width="281" alt="Screenshot 2024-05-01 at 02 17 07" src="https://github.com/emiliarojo/cash-register-frontend/assets/115421477/31581507-7eed-4588-9b93-5daabffc7f0c">
+<img width="281" alt="Screenshot 2024-05-01 at 02 17 14" src="https://github.com/emiliarojo/cash-register-frontend/assets/115421477/d779df1a-c8ab-493b-b744-7605e64b50e9">
