@@ -24,4 +24,11 @@
   &:hover {
     background-color: #333;
   }
+  &:disabled {
+    background-color: #D3D3D3;
+    cursor: initial;
+    &:hover {
+      background-color: #D3D3D3;
+    }
+  }
 }

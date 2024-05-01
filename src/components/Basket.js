@@ -3,7 +3,6 @@ import Product from './Product';
 
 const Basket = ({ products, basketItems, onQuantityChange }) => {
   const getBasketItem = (product, basketItems) => basketItems.find(item => item.product_id === product.id);
-  console.log('Basket Items:', basketItems);
 
   return (
     <div className="card-basket-items">

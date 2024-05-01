@@ -36,7 +36,6 @@ const App = () => {
   }, []);
 
   const handleQuantityChange = async (productId, change) => {
-    console.log("Basket ID:", basketId);
     try {
       const existingItem = basketItems.find(item => item.product_id === productId);
       const newQuantity = (existingItem ? existingItem.quantity : 0) + change;
@@ -69,7 +68,6 @@ const App = () => {
   const handleCheckout = async () => {
     try {
       const result = await checkoutBasket(basketId);
-      console.log('Checkout result:', result);
       setReceiptDetails(result);
       setCheckingOut(true);
     } catch (error) {
@@ -83,7 +81,7 @@ const App = () => {
         <div className="card-basket">
           <Basket products={products} basketItems={basketItems} onQuantityChange={handleQuantityChange} />
           <div className="container-btn-checkout">
-            <CheckoutButton onCheckout={handleCheckout} />
+            <CheckoutButton onCheckout={handleCheckout} basketItems={basketItems} />
           </div>
         </div>
       </div>
