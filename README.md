@@ -59,6 +59,7 @@ The app is configured to make API requests to a Rails backend hosted on Heroku. 
 <img width="1437" alt="Screenshot 2024-05-01 at 01 57 34" src="https://github.com/emiliarojo/cash-register-frontend/assets/115421477/f4c1d950-0ac7-424e-a327-dfc0af2bc192">
 <img width="1437" alt="Screenshot 2024-05-01 at 01 58 08" src="https://github.com/emiliarojo/cash-register-frontend/assets/115421477/f372ca4c-dfd4-4a8e-ac23-1733d1269aba">
 <img width="282" alt="Screenshot 2024-05-01 at 02 03 02" src="https://github.com/emiliarojo/cash-register-frontend/assets/115421477/6ddede61-a60d-4e62-9fb3-c0695d58abb5">
+<img width="282" alt="Screenshot 2024-05-01 at 02 03 23" src="https://github.com/emiliarojo/cash-register-frontend/assets/115421477/1da30b7f-8549-431b-b9a2-ebaf436fd8d6">
 <img width="282" alt="Screenshot 2024-05-01 at 02 03 32" src="https://github.com/emiliarojo/cash-register-frontend/assets/115421477/ad93f32d-ad17-4394-9f4e-ce22e2eef5f3">
 <img width="282" alt="Screenshot 2024-05-01 at 02 04 21" src="https://github.com/emiliarojo/cash-register-frontend/assets/115421477/cbab8b8f-a8e5-47ed-b726-98955348b384">
 
