@@ -17,8 +17,8 @@ You can check it out by clicking on this [link](https://cash-register-frontend.v
 ## Installation
 1. Clone the repository:
   ```
-    git clone <repository-url>
-    cd <repository-directory>
+    git clone https://github.com/emiliarojo/cash-register-frontend
+    cd cash-register-frontend
   ```
 2. Instal the dependencies:
   ```
