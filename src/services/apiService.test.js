@@ -1,5 +1,3 @@
-// apiService.test.js
-
 import { getProducts, createBasket, getBasketItems, addItemToBasket, updateItemInBasket, removeItemFromBasket, checkoutBasket } from './apiService';
 
 global.fetch = jest.fn();
@@ -81,31 +79,44 @@ describe('API Functions', () => {
     const basketId = 1;
     const productId = 1;
     const quantity = 2;
-    const mockResponse = { id: 1, product_id: productId, quantity, discount_price: 3.50, paid_quantity: 1 };
 
     fetch.mockResolvedValueOnce({
       ok: true,
+      json: () => Promise.resolve([{ id: 1, product_id: productId, quantity: 1 }]),
       headers: {
-        get: (name) => name === "Content-Length" ? "10" : null,
+        get: jest.fn(() => "10"),
       },
-      json: () => Promise.resolve(mockResponse),
+    });
+
+    fetch.mockResolvedValueOnce({
+      ok: true,
+      json: () => Promise.resolve({ id: 1, product_id: productId, quantity }),
+      headers: {
+        get: jest.fn(() => "10"),
+      },
     });
 
     await addItemToBasket(basketId, productId, quantity);
 
-    expect(fetch).toHaveBeenCalledWith(`https://cash-register-api-fd7bc2ac94d6.herokuapp.com/baskets/${basketId}/basket_items/${mockResponse.id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ quantity }),
-      credentials: 'include',
-    });
+    expect(fetch).toHaveBeenCalledTimes(2);
+    expect(fetch).toHaveBeenLastCalledWith(
+      expect.stringContaining(`baskets/${basketId}/basket_items/`),
+      expect.objectContaining({
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ quantity }),
+        credentials: 'include',
+      }),
+    );
   });
+
+
 
   test('updateItemInBasket makes a PUT request to update an item', async () => {
     const basketId = 1;
     const basketItemId = 1;
     const quantity = 3;
-    const mockResponse = { id: basketItemId, product_id: 1, quantity, discount_price: 3.50, paid_quantity: 2 };
+    const mockResponse = { id: basketItemId, product_id: 1, quantity: quantity };
 
     fetch.mockResolvedValueOnce({
       ok: true,
@@ -123,8 +134,6 @@ describe('API Functions', () => {
       body: JSON.stringify({ quantity }),
       credentials: 'include',
     });
-
-    // Additional checks...
   });
 
   test('removeItemFromBasket makes a DELETE request', async () => {
